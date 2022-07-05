@@ -8,6 +8,5 @@ one:
 
 two:
   amount: 9.99
-  completed_at: 2022-07-05 18:26:32
   merchant: two
   shopper: two
