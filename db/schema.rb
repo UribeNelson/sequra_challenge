@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_05_225519) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_05_233919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "disbursements", force: :cascade do |t|
+    t.bigint "merchant_id", null: false
+    t.datetime "start_date"
+    t.decimal "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["merchant_id"], name: "index_disbursements_on_merchant_id"
+  end
 
   create_table "merchants", force: :cascade do |t|
     t.string "name"
@@ -42,6 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_225519) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "disbursements", "merchants"
   add_foreign_key "orders", "merchants"
   add_foreign_key "orders", "shoppers"
 end
