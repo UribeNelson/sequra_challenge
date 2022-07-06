@@ -48,3 +48,19 @@ csv.each do |row|
 end
 
 puts "There are now #{Order.count} rows in the orders table"
+
+
+ActiveRecord::Base.connection.execute("insert into public.disbursements
+  SELECT 
+  pg_catalog.row_number() over (order by t.merchant_id) as id,
+  t.merchant_id, 
+  date_trunc('week',t.completed_at) as weekly, 
+  sum(t.fee), 
+  (date_trunc('week',t.completed_at)+INTERVAL'7 day') as end_date,
+  CURRENT_DATE
+  FROM public.orders t
+  where t.completed_at is not null
+  group by weekly, t.merchant_id
+  order by t.merchant_id, weekly")
+
+  puts "There are now #{Disbursement.count} disbursements."
