@@ -1,12 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  amount: 50
-  completed_at: 2022-07-05 18:26:32
   merchant: one
-  shopper: one
+  start_date: 2022-07-05 19:39:19
+  amount: 9.99
 
 two:
-  amount: 500
   merchant: two
-  shopper: two
+  start_date: 2022-07-05 19:39:19
+  amount: 9.99
